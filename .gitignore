@@ -1,0 +1,26 @@
+# Godot-specific ignores
+.godot/
+.import/
+export_preset.cfg
+
+# Mono/C# specific ignores
+.mono/
+*.csproj
+*.sln
+
+# Build artifacts
+*.exe
+*.zip
+*.tar.gz
+*.dmg
+*.app
+*.ipa
+*.apk
+*.debug
+*.release
+
+# IDE specific ignores
+.vscode/
+.idea/
+*.swp
+*.swo
