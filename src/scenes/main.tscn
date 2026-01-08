@@ -1,141 +1,72 @@
-[gd_scene load_steps=11 format=3 uid="uid://dy8yek6xyrvd4"]
+[gd_scene load_steps=13 format=3 uid="uid://dy8yek6xyrvd4"]
 
-[ext_resource type="PackedScene" uid="uid://b64bxo5l0n1d2" path="res://assets/AssetCokpit.glb" id="1_kkvs4"]
-[ext_resource type="Script" uid="uid://dv7j2bbpk73ru" path="res://src/scripts/CockpitCamera.gd" id="2_kkvs4"]
+[ext_resource type="Script" path="res://src/scripts/MainScene.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://bqqax4c73b0dl" path="res://assets/AssetCokpit.glb" id="2_cockpit"]
+[ext_resource type="Script" uid="uid://dv7j2bbpk73ru" path="res://src/scripts/CockpitCamera.gd" id="3_camera"]
+[ext_resource type="PackedScene" path="res://src/scenes/PlayerInventory.tscn" id="4_inventory"]
+[ext_resource type="PackedScene" uid="uid://c7x18j7x7x7x7" path="res://src/scenes/Crosshair.tscn" id="5_crosshair"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kkvs4"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rr2wm"]
 sky_top_color = Color(0, 0.41568628, 0.7764706, 1)
 sky_horizon_color = Color(0.52585006, 0.6952424, 0.8508813, 1)
 ground_bottom_color = Color(0.435773, 0.51849985, 0.6767904, 1)
 ground_horizon_color = Color(0.6745098, 0.79607844, 0.9098039, 1)
 
 [sub_resource type="Sky" id="Sky_rr2wm"]
-sky_material = SubResource("ProceduralSkyMaterial_kkvs4")
+sky_material = SubResource("ProceduralSkyMaterial_rr2wm")
 
 [sub_resource type="Environment" id="Environment_32aa5"]
 background_mode = 2
 sky = SubResource("Sky_rr2wm")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rr2wm"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5dlwx"]
 size = Vector3(0.7946167, 0.13378906, 0.76503754)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_32aa5"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_o81g6"]
 size = Vector3(1.109375, 0.123046875, 1.010498)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rr2wm"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dbro3"]
 radius = 0.5229492
 height = 1.411377
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_5dlwx"]
-size = Vector3(0.31396484, 0.3363037, 0.15576172)
+[sub_resource type="BoxShape3D" id="BoxShape3D_32aa5"]
+size = Vector3(0.5459595, 0.21081543, 0.43945313)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_o81g6"]
-size = Vector3(0.32726288, 0.14501953, 0.33093262)
+[node name="MainScene" type="Node3D"]
+script = ExtResource("1_main")
 
-[node name="SkyTeam" instance=ExtResource("1_kkvs4")]
+[node name="Cockpit" parent="." instance=ExtResource("2_cockpit")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
-environment = SubResource("Environment_32aa5")
-
-[node name="Soleil" type="DirectionalLight3D" parent="." index="1"]
+[node name="Soleil" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9190872, 0.3940542, 0, -0.3940542, 0.9190872, 0.00072717667, 22.156654, 30.632616)
 
-[node name="CockpitControlCenter_Mesh" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00072717667, 0.010174751, -0.0043005943)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_32aa5")
 
-[node name="Area3D" type="Area3D" parent="CockpitControlCenter_Mesh" index="0"]
+[node name="Area3D" type="Area3D" parent="Cockpit/CockpitControlCenter_Mesh" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7848635, 0)
 
-[node name="Altitude" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="0"]
+[node name="Altitude" type="CollisionShape3D" parent="Cockpit/CockpitControlCenter_Mesh/Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, -0.26250923, 0.96492946, 0, -0.96492946, -0.26250923, -0.0030789375, 1.8070173, -0.6499545)
-shape = SubResource("BoxShape3D_rr2wm")
+shape = SubResource("BoxShape3D_5dlwx")
 
-[node name="Trains1" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="1"]
-transform = Transform3D(1, 0, 0, 0, -0.24830116, 0.96868294, 0, -0.96868294, -0.24830116, -1.1982951, 1.2247498, -0.534076)
-shape = SubResource("BoxShape3D_rr2wm")
-
-[node name="Trains2" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="2"]
-transform = Transform3D(1, 0, 0, 0, -0.24830116, 0.96868294, 0, -0.96868294, -0.24830116, -1.2176492, 2.2615557, -0.71579564)
-shape = SubResource("BoxShape3D_rr2wm")
-
-[node name="Trains3" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="3"]
-transform = Transform3D(1, 0, 0, 0, -0.24830116, 0.96868294, 0, -0.96868294, -0.24830116, -2.4505565, 1.9607737, -0.67987233)
-shape = SubResource("BoxShape3D_rr2wm")
-
-[node name="??" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="4"]
-transform = Transform3D(1, 0, 0, 0, -0.24830116, 0.96868294, 0, -0.96868294, -0.24830116, -3.6706886, 1.9607737, -0.67987233)
-shape = SubResource("BoxShape3D_rr2wm")
-
-[node name="Volet1" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="5"]
-transform = Transform3D(1, 0, 0, 0, -0.24830116, 0.96868294, 0, -0.96868294, -0.24830116, 3.6653929, 1.9607737, -0.67987233)
-shape = SubResource("BoxShape3D_rr2wm")
-
-[node name="Volet2" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="6"]
-transform = Transform3D(1, 0, 0, 0, -0.24830116, 0.96868294, 0, -0.96868294, -0.24830116, 2.4721074, 1.9607737, -0.67987233)
-shape = SubResource("BoxShape3D_rr2wm")
-
-[node name="Volet3" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="7"]
-transform = Transform3D(1, 0, 0, 0, -0.21388303, 0.9768593, 0, -0.9768593, -0.21388303, 1.1921912, 2.2520375, -0.77690035)
-shape = SubResource("BoxShape3D_rr2wm")
-
-[node name="Volet4" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="8"]
-transform = Transform3D(1, 0, 0, 0, -0.21388303, 0.9768593, 0, -0.9768593, -0.21388303, 1.2139411, 1.2187502, -0.58461624)
-shape = SubResource("BoxShape3D_rr2wm")
-
-[node name="Radar" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="9"]
-transform = Transform3D(1, 0, 0, 0, 0.8835941, -0.46825373, 0, 0.46825373, 0.8835941, -0.00041103363, 0.37623143, 0.9964927)
+[node name="BoutonLanceDes" type="CollisionShape3D" parent="Cockpit/CockpitControlCenter_Mesh/Area3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0010900795, 0.74222946, 0.07071304)
 shape = SubResource("BoxShape3D_32aa5")
 
-[node name="AxePilote" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.160452, 1.1818209, 0.27535868)
-shape = SubResource("CapsuleShape3D_rr2wm")
-
-[node name="AxeCopilote" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="11"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2116158, 1.114147, 0.28592908)
-shape = SubResource("CapsuleShape3D_rr2wm")
-
-[node name="RadioPilote" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1719005, 2.9515414, -1.1520345)
-shape = SubResource("BoxShape3D_5dlwx")
-
-[node name="RadioCopilote1" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.569238, 2.9515414, -1.1520345)
-shape = SubResource("BoxShape3D_5dlwx")
-
-[node name="RadioCopilote2" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="14"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9911041, 2.9515414, -1.1520345)
-shape = SubResource("BoxShape3D_5dlwx")
-
-[node name="Freins" type="CollisionShape3D" parent="CockpitControlCenter_Mesh/Area3D" index="15"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7562623, 0.04487586, 2.0419154)
-shape = SubResource("BoxShape3D_o81g6")
-
-[node name="SpotCopilote" type="SpotLight3D" parent="CockpitControlCenter_Mesh" index="1"]
-transform = Transform3D(1, 0, 0, 0, -0.0019548761, 0.9999981, 0, -0.9999981, -0.0019548761, 2.2946846, 9.072137, 3.3734818)
-light_energy = 7.98
-spot_range = 17.344843
-spot_angle = 37.07726
-
-[node name="SpotPilote" type="SpotLight3D" parent="CockpitControlCenter_Mesh" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.041910484, 0.99912137, 0, -0.99912137, 0.041910484, -1.9991553, 9.236712, 3.793377)
-light_energy = 7.98
-spot_range = 17.344843
-spot_angle = 37.07726
-
-[node name="Pilote" type="CharacterBody3D" parent="CockpitControlCenter_Mesh" index="3"]
-
-[node name="CouPilote" type="Node3D" parent="CockpitControlCenter_Mesh/Pilote" index="0"]
-
-[node name="CamPilote" type="Camera3D" parent="CockpitControlCenter_Mesh/Pilote/CouPilote" index="0"]
+[node name="CamPilote" type="Camera3D" parent="Cockpit/CockpitControlCenter_Mesh/Pilote/CouPilote" index="0"]
 transform = Transform3D(0.9840841, 0.017069133, -0.17688142, 0, 0.9953761, 0.09605422, 0.1777031, -0.094525434, 0.97953385, -3.1945784, 5.8546424, 4.1857986)
 fov = 57.898506
-script = ExtResource("2_kkvs4")
+script = ExtResource("3_camera")
 
-[node name="Copilote" type="CharacterBody3D" parent="CockpitControlCenter_Mesh" index="4"]
-
-[node name="CouCopilote" type="Node3D" parent="CockpitControlCenter_Mesh/Copilote" index="0"]
-
-[node name="CamCopilote" type="Camera3D" parent="CockpitControlCenter_Mesh/Copilote/CouCopilote" index="0"]
+[node name="CamCopilote" type="Camera3D" parent="Cockpit/CockpitControlCenter_Mesh/Copilote/CouCopilote" index="0"]
 transform = Transform3D(0.97245955, -0.022387546, 0.23199429, -3.7252903e-09, 0.99537617, 0.09605422, -0.233072, -0.093408845, 0.9679629, 3.2066963, 5.854643, 3.9912052)
 fov = 57.898506
-script = ExtResource("2_kkvs4")
+script = ExtResource("3_camera")
+
+[node name="PilotInventory" parent="." instance=ExtResource("4_inventory")]
+
+[node name="CopilotInventory" parent="." instance=ExtResource("4_inventory")]
+is_pilot = false
+
+[node name="Crosshair" parent="." instance=ExtResource("5_crosshair")]

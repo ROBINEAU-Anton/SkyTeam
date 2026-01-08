@@ -1,0 +1,158 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8x18j7x7x7x7"]
+
+[ext_resource type="Script" path="res://src/scripts/RoleSelection.gd" id="1_role_selection"]
+
+[node name="RoleSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_role_selection")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.0901961, 0.160784, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Header" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "PRÉPARATION DU VOL"
+horizontal_alignment = 1
+
+[node name="NetworkUI" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HostButton" type="Button" parent="CenterContainer/VBoxContainer/NetworkUI"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "HÉBERGER (HOST)"
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer/NetworkUI"]
+layout_mode = 2
+
+[node name="IPLabel" type="Label" parent="CenterContainer/VBoxContainer/NetworkUI"]
+layout_mode = 2
+text = "Adresse IP de l'hôte :"
+horizontal_alignment = 1
+
+[node name="IPEdit" type="LineEdit" parent="CenterContainer/VBoxContainer/NetworkUI"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+placeholder_text = "127.0.0.1"
+alignment = 1
+
+[node name="JoinButton" type="Button" parent="CenterContainer/VBoxContainer/NetworkUI"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "REJOINDRE (JOIN)"
+
+[node name="RoleUI" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RoleUI"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="PilotPanel" type="PanelContainer" parent="CenterContainer/VBoxContainer/RoleUI/HBoxContainer"]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/PilotPanel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Icon" type="Label" parent="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/PilotPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "👨‍✈️"
+horizontal_alignment = 1
+
+[node name="PilotSelectButton" type="Button" parent="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/PilotPanel/VBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "SÉLECTIONNER"
+
+[node name="PilotReadyButton" type="Button" parent="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/PilotPanel/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "PRÊT ?"
+
+[node name="CopilotPanel" type="PanelContainer" parent="CenterContainer/VBoxContainer/RoleUI/HBoxContainer"]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/CopilotPanel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Icon" type="Label" parent="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/CopilotPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "👩‍✈️"
+horizontal_alignment = 1
+
+[node name="CopilotSelectButton" type="Button" parent="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/CopilotPanel/VBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "SÉLECTIONNER"
+
+[node name="CopilotReadyButton" type="Button" parent="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/CopilotPanel/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "PRÊT ?"
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "LANCER LE VOL"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NetworkUI/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NetworkUI/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/PilotPanel/VBoxContainer/PilotSelectButton" to="." method="_on_pilot_select_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/PilotPanel/VBoxContainer/PilotReadyButton" to="." method="_on_pilot_ready_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/CopilotPanel/VBoxContainer/CopilotSelectButton" to="." method="_on_copilot_select_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/RoleUI/HBoxContainer/CopilotPanel/VBoxContainer/CopilotReadyButton" to="." method="_on_copilot_ready_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

@@ -20,6 +20,8 @@ func _ready():
 	rotation_y = rotation_degrees.y
 
 func _input(event):
+	if not is_current(): return
+	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		# On accumule le mouvement
 		# Inversion de l'axe Y pour un comportement naturel (lever la souris = regarder en haut)
